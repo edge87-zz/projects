@@ -1,0 +1,165 @@
+<!doctype html>
+
+<html>
+	<head>
+		<title>Fish Tank Status Page</title>
+
+		<link type="text/css" rel="stylesheet" href="./css/reset.css">
+		<link type="text/css" rel="stylesheet" href="./css/960_12_col.css">
+		<link type="text/css" rel="stylesheet" href="./css/style.css">
+		
+<!--		<META HTTP-EQUIV="REFRESH" CONTENT="5"> --> 
+		<script type="text/javascript" src="http://172.16.8.177/something.js"></script>
+		<script type="text/javascript">
+			//Global Varables, Write these from the Arduino
+//			var refreshing;						//Boolean Value. Is the tank currently refreshing water
+//			var refresh_progress;			    //IF it is refreshing this value is a % that it is complete
+//			var heater;							//Boolean Value value. Is the heater on or off.
+//			var min_temp;						//Lowest the temperature in F has been since last reset.
+//			var max_temp;						//Highest the temperature in F has been since last reset.
+//			var current_temp;					//Current Temp of tank in F.
+			var tank_name = "FRY Tank";						//Name of the Tank we're watching.
+			var last_water_refresh;				//Date the water was last changed
+
+			function heating(status, alerter){
+				if (status == true) {
+					document.getElementById('heaton').style.display = 'none';
+					document.getElementById('heatoff').style.display = 'inline-block';
+					
+					if (alerter == true){
+						alert('Heater is now on');
+					}	
+				}
+				
+				if (status == false){
+					document.getElementById('heaton').style.display = 'inline-block';
+					document.getElementById('heatoff').style.display = 'none';
+					
+					if (alerter == true){
+						alert('Heater is now off')
+					}
+				}
+			}
+			
+			function header(){
+				var current_time = new Date();
+				var month = current_time.getMonth() + 1;
+				var minutes = current_time.getMinutes();
+					if (minutes < 10){
+						minutes = "0" + minutes;
+					}
+
+				document.write(window.tank_name + " - ");
+				document.write(month + "/" + current_time.getDate() + "/" + current_time.getFullYear() +" ");
+				document.write(current_time.getHours() + ":" + minutes + " ");
+				
+				if(current_time.getHours() > 11){
+					document.write("PM");
+				} 
+				else {
+					document.write("AM");
+				}
+				
+			}
+			
+			function update(){
+				heating(heater, false);
+				
+				if (refreshing == true){
+					document.getElementById('refreshing').style.display = 'inline-block';		
+				}
+				
+				document.getElementById("waterlvl").setAttribute("value", water_level);
+			}
+			
+			function progressBar(){
+				document.write("<progress value=" + window.refresh_progress + " max='100' id='refreshing'></progress>");
+			}	
+			
+			function waterlevel(){
+				document.write(window.water_level + " ");
+				
+				
+			}
+			
+			function fedat(){
+				document.write(last_feed_time[0] + "/");
+				document.write(last_feed_time[1] + "/");
+				document.write(last_feed_time[2] + " ");
+				document.write(last_feed_time[3] + ":");
+				document.write(last_feed_time[4] + ":");
+				document.write(last_feed_time[5])
+			}
+			
+			function waterat(){
+				document.write(last_water_refresh[0] + "/");
+				document.write(last_water_refresh[1] + "/");
+				document.write(last_water_refresh[2] + " ");
+				document.write(last_water_refresh[3] + ":");
+				document.write(last_water_refresh[4] + ":");
+				document.write(last_water_refresh[5]);
+			}
+			
+		</script>
+		
+		
+	</head>
+
+	<body>
+		<div class="container_12">
+			<div class="grid_12">
+				<h1>Fish Tank - <script type="text/javascript">header();</script> </h1>
+			</div>	
+			
+			<div class="grid_6" id="temp">
+				<h2>Temperature</h2>
+					<h6>Minimum: <script>document.write(min_temp)</script></h6>
+					<h6>Max: <script>document.write(max_temp)</script></h6>
+					<h6>Current: <script>document.write(current_temp)</script></h6>
+					<br />
+					<h6>Heater Status: <script>document.write(heater)</script></h6>
+					<button type="button" onclick="heating('ON', true)" id="heaton">Heater On</button> <button type="button" onclick="heating('OFF', true)" id="heatoff">Heater Off</button>
+			</div>
+
+			<div class="grid_6" id="food">
+				<h2>Last Feed Time</h2>
+					<h6>Fed at: <script type="text/javascript">fedat();</script></h6>
+					<button type="button" onclick="alert('Yumm Yumm Food time!')">Feed Fish</button> 
+					
+			</div>
+			
+			<div class="grid_6" id="ph">
+				<h2>PH Level</h2>	
+			</div>
+			
+			<div class="grid_6" id="water">
+				<h2>Water Information</h2>
+					<h3>Water Age</h3>
+						<h6>Last Changed: <script type="text/javascript">waterat();</script></h6>
+						<button type="button" onclick="alert('Refresh Cycle now Active!')">Refresh Water</button>
+						<script type="text/javascript">progressBar();</script>
+						
+						
+		
+					<h3>Water Level</h3>
+						<h6>Current Height: <script type="text/javascript">waterlevel();</script> <meter max="12.5" id="waterlvl"></meter></h6>
+			</div>
+			
+			<div class="grid_6 alpha omega" id="nitro">
+				<h2>Nitrogen Cycle Information</h2>	
+			</div>
+			
+		</div>
+	
+		
+		<script type="text/javascript">update();</script> <!-- Takes care of hidding things we don't need -->
+		
+		
+	
+		
+		
+		
+	
+		
+	</body>
+</html>

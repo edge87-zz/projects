@@ -1,0 +1,4 @@
+Remove Filesystem checks
+Remove un-needed services
+remove grub pauses
+shorten bios/EFI

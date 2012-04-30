@@ -1,0 +1,70 @@
+h1{
+	color:black;
+	font-size:35px;
+	margin-left:20px;
+}
+
+h2{
+	margin:6px 0px 10px 20px;
+	font-size:25px;
+	border-bottom:2px solid black;  
+	color:#de5400;
+	
+}
+
+h3{
+	margin:0px 0px 5px 20px;
+	font-size:20px;
+}
+
+h6{
+	color:#f9f3f3;
+	margin:5px 0px 5px 25px;
+	font-size:18px;
+	
+}
+
+button{
+	margin:10px 0px 10px 20px;	
+}
+
+.grid_6 {
+	min-height:300px;
+	margin:10px 8px 5px 8px;
+	border: 2px black solid;
+	background-image:url("../img/background.png")
+}
+
+
+#water{
+	
+}
+
+#temp{
+		
+}
+
+#food{
+		
+}
+
+#ph{
+	
+}
+
+#nitro{
+	
+}
+
+#refreshing{
+	display:none;
+}
+
+#heaton{
+	/*display:none;*/
+}
+
+#heatoff{
+	display:none;
+}
+

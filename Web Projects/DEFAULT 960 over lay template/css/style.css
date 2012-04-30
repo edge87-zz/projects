@@ -1,0 +1,25 @@
+/*
+Theme Name: LanPad
+Theme URI: http://www.LanPad.com
+Description: The LanPad default Theme
+Author: Andrew R. Edgerton
+Author URI: http://www.LanPad.com
+Version: 0.1
+Tags: black, blue, white, two-columns, fixed-width, custom-header, custom-background, threaded-comments, sticky-post, translation-ready, microformats, rtl-language-support, editor-style, custom-menu (optional)
+
+License: All Rights Reserved.
+License URI: www.LanPad.com/license.pdf
+
+General comments (optional).
+*/
+
+#header {
+  background: url("<?php bloginfo('stylesheet_directory'); ?>/images/header.png");
+  background: no-repeat bottom center; 
+}
+
+#headerimg  {
+  margin: 7px 9px 0; 
+  height: 192px; 
+  width: 740px; 
+}

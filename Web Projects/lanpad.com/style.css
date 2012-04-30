@@ -1,0 +1,155 @@
+/*
+Theme Name: LanPad
+Theme URI: http://www.LanPad.com
+Description: The LanPad default Theme
+Author: Andrew R. Edgerton
+Author URI: http://www.LanPad.com
+Version: 0.1
+Tags: my site
+
+License: All Rights Reserved
+License URI: www.LanPad.com/license.pdf
+
+*/
+
+body {
+ 	background: #123;
+ 	color: #333;
+ 	font-size: 11px;
+  	height: auto;
+ 	padding-bottom: 20px;
+}
+
+#header {
+	background-color:#123;
+	margin:10px 0px 20px 0px;
+	width:960px;
+}
+
+#footer {
+	border-top-style:solid;
+	border-top-color:black;
+	border-top-width:4px;
+}
+
+#credits {
+	color:#F2B33D;
+	text-align:center;
+	margin:10px 0px 0px 0px;
+}
+
+.navigation-bar {
+	margin-bottom:20px;
+}
+
+.navigation-bar div.grid_4 {
+	min-height:40px;
+	text-align:center;
+	/*background-color:blue;*/
+}
+
+.navigation-bar a,
+.navigation-bar a:visited{
+	color:#F2EA79;
+	font-size:25px;
+	margin: 10px auto 10px auto;
+	text-decoration:none;
+}
+
+.navigation-bar a:active,
+.navigation-bar a:hover{
+	color:white;
+}
+
+.border-right{
+	border-right-style: solid;
+	border-right-color: white;
+	border-right-width: 2px;
+	margin-right:3px;
+}
+
+.content{
+	margin:0px 0px 20px 30px;
+}
+
+.post-meta{
+	margin:0px 0px 40px 0px;
+	font-size:15px;
+	color:#F2B33D;
+}
+
+
+.post-meta a,
+.post-meta a:visited{
+
+	color:#F2B33D;
+}
+
+.post-meta a:hover,
+.post-meta a:active{
+	color:white;
+}
+
+.post-thumb{
+	float:left;
+	margin-right:10px;
+}
+
+.post-title{
+	color:#F2EA79;
+	font-size:30px;
+	font-family:"lucina console";
+	font-style:italic;
+	font-weight:bold;
+	margin:0px 0px 0px 0px;
+	padding:0px 0px 0px 0px;
+}
+
+.post-title a,
+.post-title a:visited{
+	color:#F2EA79;
+	text-decoration:none;
+}
+
+.post-title a:active,
+.post-title a:hover{
+	color:white;
+}
+
+.post-content{
+	margin:15px 0px 20px 0px;	
+}
+
+.post-content p iframe{
+	padding-left:155px;
+}
+
+.post-content p{
+	color:#4E8DA6;
+	font-size:20px;
+	font-family:"Liberation Sans";
+	border-left-style:solid;
+	border-left-color:#F2B33D;
+	border-left-width:3px;
+	padding-left:5px;
+}
+
+.post-date {
+	color:#F2B33D;
+	font-size:15px;
+	font-family:"Arial Narrow";
+	margin:-5px 0px 0px 10px;
+	padding:0px 0px 0px 0px;
+}
+
+.pagination{
+	
+}
+
+.newer{
+	
+}
+
+.older{
+	
+}
