@@ -105,12 +105,38 @@ body {
 	padding:0px 0px 0px 0px;
 }
 
+.cat-title-archive{
+	color:#F2EA79;
+	font-size:30px;
+	font-family:"lucina console";
+	font-style:italic;
+	font-weight:bold;
+	margin:0px 0px 20px 0px;
+	padding:0px 0px 0px 0px;	
+	text-decoration:underline;
+}
+
+.post-title-archive{
+	color:#F2EA79;
+	font-size:30px;
+	font-family:"lucina console";
+	font-style:italic;
+	font-weight:bold;
+	margin:0px 0px 0px 0px;
+	padding:0px 0px 0px 0px;
+}
+
+.post-title-archive a,
+.post-title-archive a:visited,
 .post-title a,
 .post-title a:visited{
 	color:#F2EA79;
 	text-decoration:none;
 }
 
+
+.post-title-archive a:active,
+.post-title-archive a:hover,
 .post-title a:active,
 .post-title a:hover{
 	color:white;
@@ -118,6 +144,9 @@ body {
 
 .post-content{
 	margin:15px 0px 20px 0px;	
+	border-left-style:solid;
+	border-left-color:#F2B33D;
+	border-left-width:3px;
 }
 
 .post-content p iframe{
@@ -128,10 +157,9 @@ body {
 	color:#4E8DA6;
 	font-size:20px;
 	font-family:"Liberation Sans";
-	border-left-style:solid;
-	border-left-color:#F2B33D;
-	border-left-width:3px;
+
 	padding-left:5px;
+	margin: 0px 0px 10px 0px;
 }
 
 .post-date {
@@ -140,6 +168,14 @@ body {
 	font-family:"Arial Narrow";
 	margin:-5px 0px 0px 10px;
 	padding:0px 0px 0px 0px;
+}
+
+.post-date-archive{
+	color:#F2B33D;
+	font-size:15px;
+	font-family:"Arial Narrow";
+	margin:-5px 0px 0px 10px;
+	padding:0px 0px 20px 0px;
 }
 
 .pagination{

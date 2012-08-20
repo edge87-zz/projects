@@ -1,9 +1,19 @@
 /*
- #Web Server - Code Portion#
- created 18 Dec 2009
- by David A. Mellis
- modified 4 Sep 2010
- by Tom Igoe
+Fish Tank Monitor
+Author: Andrew R. Edgerton
+
+Description: This Arduino application monitors a connected fish tank. It reports back temperate, water height, last feed time, and other metrics. 
+
+Last Updated: 20Aug12
+
+Other Author Credits
+
+#Web Server - Code Portion#
+ Created (18 Dec 2009)
+ By: David A. Mellis
+ 
+ Modified (4 Sep 2010)
+ By: Tom Igoe
  */
  
  /*
@@ -18,19 +28,19 @@
 		* Feeder:
 		
 	Author: Andrew R. Edgerton
-	Date: 22FEb12
 	
 	Description: Code has a web server setup to relay JS back to a browser as directed to by a web server's page. The return should
 		be well formed java script vars. 
- 
- 
  */
 
 #include <SPI.h>
 #include <Ethernet.h>
 #include "OneWire.h"
 
-//constants
+//Tank Configurations
+const int tankHeight = 14;
+
+//Constants
 const int pingPin = 2;		//Ping))) Sensor Pin
 const int DS18S20_Pin = 4;	//DS18S20 Signal pin on digital 2
 
@@ -48,27 +58,30 @@ EthernetServer server(80);
 OneWire ds(DS18S20_Pin);
 
 //Tank Variables being sent to website
-boolean heater = true;
-boolean refreshing = true;
+boolean heater = false;
+boolean lights = false;
+boolean refreshing = false;
 int refresh_progress = 35; // In percent complete 0 = just started, 100 = done
-float min_temp = 100;
-float max_temp = 20;
+float min_temp = 100.00f;
+float max_temp = 20.00f;
 float current_temp = 75.00f; 
-float water_level; //in inches water level                
+float water_level = 0.00f; //in inches water level                
 int last_feed[] = {22,2,2012,17,54,39}; //Day,Month,Year,Hour military,Minute,Second
 int last_water_refresh[] = {22,2,2012,8,30,44}; //Day,Month,Year,Hour military,Minute,Second
 int check_inv = 0;
-void setup()
-{
+
+void setup(){
   // start the Ethernet connection and the server:
   Ethernet.begin(mac, ip);
   server.begin();
+  
+  Serial.begin(9600);
 }
 
-void loop()
-{
+void loop(){
   // listen for incoming clients
   EthernetClient client = server.available();
+  
   if (client) {
     // an http request ends with a blank line
     boolean currentLineIsBlank = true;
@@ -79,14 +92,14 @@ void loop()
         // character) and the line is blank, the http request has ended,
         // so you can send a reply
         if (c == '\n' && currentLineIsBlank) {
-          // send a standard http response header
-          client.println("HTTP/1.1 200 OK");
-          client.println("Content-Type: text/javascript");
-          client.println();
+			// send a standard http response header
+			client.println("HTTP/1.1 200 OK");
+			client.println("Content-Type: text/javascript");
+			client.println();
 
-          // Output our Javascript
-            client.print("var refreshing = ");
-            client.print(refreshing);
+			// Output our Javascript
+			client.print("var refreshing = ");
+			client.print(refreshing);
 			client.println(";");
 			
 			client.print("var refresh_progress =");
@@ -124,15 +137,15 @@ void loop()
 			client.print("last_feed_time[1] = ");
 			client.print(last_feed[1]);
 			client.println(";");
-			
+				
 			client.print("last_feed_time[2] = ");
 			client.print(last_feed[2]);
 			client.println(";");
-			
+				
 			client.print("last_feed_time[3] = ");
 			client.print(last_feed[3]);
 			client.println(";");
-			
+				
 			client.print("last_feed_time[4] = ");
 			client.print(last_feed[4]);
 			client.println(";");
@@ -148,7 +161,7 @@ void loop()
 			client.print("last_water_refresh[1] = ");
 			client.print(last_water_refresh[1]);
 			client.println(";");
-			
+		
 			client.print("last_water_refresh[2] = ");
 			client.print(last_water_refresh[2]);
 			client.println(";");
@@ -164,30 +177,36 @@ void loop()
 			client.print("last_water_refresh[5] = ");
 			client.print(last_water_refresh[5]);
 			client.println(";");
-			
-			//skip last feed time & last refresh due to array. 
 
-          break; // We're done with the webserver lets close it.
+			break; // We're done with the webserver lets close it.
         }
-        if (c == '\n') {
+		
+        if (c == '\n'){
           // you're starting a new line
           currentLineIsBlank = true;
+		  Serial.write(c);
         } 
-        else if (c != '\r') {
+        
+        else if (c != '\r'){
           // you've gotten a character on the current line
           currentLineIsBlank = false;
+		  Serial.write(c);
         }
-      }
-    }
+      }//End if web client is available
+    }//End while connected
+    
     // give the web browser time to receive the data
     delay(1);
+    
     // close the connection:
     client.stop();
 	
-  }
+  }//End if client
+  
 	if (check_inv < 1000){
 		check_inv = check_inv + 1;
 	}
+	
 	else{
 	check_water_level();
 	current_temp = getTemp();
@@ -223,7 +242,7 @@ void check_water_level(){
 	pinMode(pingPin, INPUT);
 	duration = pulseIn(pingPin, HIGH);
 
-	// convert the time into a distance
+	// convert the time into a distance and correct for height left not height missing
 	water_level = microsecondsToInches(duration);
  }
 
@@ -233,7 +252,10 @@ long microsecondsToInches(long microseconds){
   // second).  This gives the distance travelled by the ping, outbound
   // and return, so we divide by 2 to get the distance of the obstacle.
   // See: http://www.parallax.com/dl/docs/prod/acc/28015-PING-v1.3.pdf
-  return microseconds / 74 / 2;
+  
+  // Tank our tank height and subtract the distance missing to know how much isn't missing (AKA the water height)
+  
+  return tankHeight - (microseconds / 74 / 2);
 }
 
 float getTemp(){

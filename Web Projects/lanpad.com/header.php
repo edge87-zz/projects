@@ -19,7 +19,7 @@
   			
   			<div class="grid_24 navigation-bar">
   				<div class="grid_4 alpha border-right"><a href="<?php echo get_option('home')?>">Home</a></div>
-  			  	<div class="grid_4 border-right"><a href="#">Projects</a></div>
+  			  	<div class="grid_4 border-right"><a href="http://lanpad.com/project/">Projects</a></div>
   				<div class="grid_4 border-right"><a href="#">Twitter</a></div>
   				<div class="grid_4 border-right"><a href="#">Links</a></div>
   				<div class="grid_4 border-right"><a href="#">Downloads</a></div>
