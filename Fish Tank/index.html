@@ -3,14 +3,15 @@
 <html>
 	<head>
 		<title>Fish Tank Status Page</title>
+		
 
 		<link type="text/css" rel="stylesheet" href="./css/reset.css">
 		<link type="text/css" rel="stylesheet" href="./css/960_12_col.css">
 		<link type="text/css" rel="stylesheet" href="./css/style.css">
 		
-<!--		<META HTTP-EQUIV="REFRESH" CONTENT="5"> --> 
-<!--		<script type="text/javascript" src="http://172.16.8.177/something.js"></script> <!-- REAL TANK -->
-		<script type="text/javascript" src="./local.js"></script> <!-- Fake Tank -->
+<!--		<META HTTP-EQUIV="REFRESH" CONTENT="5">-->  
+		<script type="text/javascript" src="http://172.16.10.60/something.js"></script> <!-- REAL TANK -->
+<!--		<script type="text/javascript" src="./local.js"></script> <!-- Fake Tank -->
 		
 		
 		
@@ -23,7 +24,7 @@
 //			var max_temp;						//Highest the temperature in F has been since last reset.
 //			var current_temp;					//Current Temp of tank in F.
 
-			var url = "http://172.16.8.117";	//WHERE IS THE TANK
+			var url = "http://172.16.10.60";	//WHERE IS THE TANK
 			var tank_name = "FRY Tank";			//Name of the Tank we're watching.
 			var last_water_refresh;				//Date the water was last changed
 
@@ -33,7 +34,7 @@
 					document.getElementById('heatoff').style.display = 'inline-block';
 					
 					if (alerter == true){
-						post(heater, "on");
+						post("heater", "on");
 						alert('Heater is turning on, Please Wait!');
 					}	
 				}
@@ -43,7 +44,7 @@
 					document.getElementById('heatoff').style.display = 'none';
 					
 					if (alerter == true){
-						post(heater, "off");
+						post("heater", "off");
 						alert('Heater is turning off, Please Wait!')
 					}
 				}
@@ -134,6 +135,8 @@
 			
 		</script>
 		
+		<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+		<META HTTP-EQUIV="Expires" CONTENT="-1">
 		
 	</head>
 
